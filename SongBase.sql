@@ -8,9 +8,10 @@ CREATE TABLE IF NOT EXISTS song (
     song_id INT AUTO_INCREMENT NOT NULL,
     song_title VARCHAR(255) NOT NULL,
     artist_id INT NOT NULL,
-    time_duration TIME NULL,
+    time_duration TIME NOT NULL,
     genre_id INT NULL,
     is_explicit BOOL NULL DEFAULT 0,
+    song_url VARCHAR(255) NULL,
     PRIMARY KEY (song_id)
     FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
     FOREIGN KEY (genre_id) REFERENCES genre(genre_id) ON UPDATE CASCADE ON DELETE SET NULL
@@ -47,6 +48,7 @@ CREATE TABLE IF NOT EXISTS user (
 
 CREATE TABLE IF NOT EXISTS playlist (
     playlist_id INT AUTO_INCREMENT NOT NULL,
+    track_order INT NOT NULL,
     song_id INT NOT NULL,
     PRIMARY KEY (playlist_id)
     FOREIGN KEY (song_id) REFERENCES song(song_id) ON UPDATE CASCADE ON DELETE SET NULL
@@ -62,14 +64,14 @@ CREATE TABLE IF NOT EXISTS favorites (
 
 INSERT INTO song (song_id, song_title, artist_id, time_duration, genre_id, is_explicit)
 VALUES
-    (1, 'Chosen', 1, 00:03:31, NULL, FALSE)
-    (2, 'Love I Need', 1, 00:03:33, NULL, FALSE)
-    (3, 'H.A.Y.', 6, 00:03:44, 5, FALSE)
-    (4, 'Wake Up Dead', 2, 00:03:20, NULL, FALSE)
-    (5, 'Breathing', 2, 00:04:19, NULL, FALSE)
-    (6, 'Down With The Sickness', 3, 00:03:36, 2, TRUE)
-    (7, 'Let Spirits Ride', 4, 00:04:21, 1, FALSE)
-    (8, 'The Can Can Song', 5, 00:02:11, 3, FALSE)
+    (1, 'Chosen', 1, 00:03:31, NULL, FALSE, NULL)
+    (2, 'Love I Need', 1, 00:03:33, NULL, FALSE, NULL)
+    (3, 'H.A.Y.', 6, 00:03:44, 5, FALSE, NULL)
+    (4, 'Wake Up Dead', 2, 00:03:20, NULL, FALSE, NULL)
+    (5, 'Breathing', 2, 00:04:19, NULL, FALSE, NULL)
+    (6, 'Down With The Sickness', 3, 00:03:36, 2, TRUE, NULL)
+    (7, 'Let Spirits Ride', 4, 00:04:21, 1, FALSE, NULL)
+    (8, 'The Can Can Song', 5, 00:02:11, 3, FALSE, NULL)
 ;
 
 INSERT INTO song (genre_id, genre_name)
